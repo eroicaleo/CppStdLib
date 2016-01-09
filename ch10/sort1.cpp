@@ -19,6 +19,35 @@ class Person {
         string lastname() const;
 };
 
+string Person::firstname() const {
+    return fn;
+}
+
+string Person::lastname() const {
+    return ln;
+}
+
+ostream& operator<<(ostream& os, const Person& p) {
+    os << p.lastname() << ", " <<  p.firstname();
+    return os;
+}
+
+class PersonSortCriterion {
+    bool operator()(const Person& p1, const Person& p2) const {
+        return p1.lastname() < p2.lastname() || (
+                p1.lastname() == p2.lastname() &&
+                p1.firstname() < p2.firstname());
+    }
+};
+
 int main(int argc, char *argv[]) {
+
+    Person p1("Yang", "Ge");
+    Person p2("Yukan", "Zhang");
+    Person p3("Shannon", "Ge");
+    cout << p1 << endl;
+
+    set<Person, PersonSortCriterion> col;
+    for (auto)
     return 0;
 }
