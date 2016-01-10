@@ -33,6 +33,7 @@ ostream& operator<<(ostream& os, const Person& p) {
 }
 
 class PersonSortCriterion {
+    public:
     bool operator()(const Person& p1, const Person& p2) const {
         return p1.lastname() < p2.lastname() || (
                 p1.lastname() == p2.lastname() &&
@@ -48,6 +49,11 @@ int main(int argc, char *argv[]) {
     cout << p1 << endl;
 
     set<Person, PersonSortCriterion> col;
-    for (auto)
+    col.insert(p1);
+    col.insert(p2);
+    col.insert(p3);
+    for (auto pos = col.begin(); pos != col.end(); ++pos) {
+        cout << *pos << endl;
+    }
     return 0;
 }
