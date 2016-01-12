@@ -8,4 +8,11 @@ It has three important advantages:
   to specify certain behavior.
 3. It's usually faster than a function pointer.
 
-Functor can be used as sorting criterion.
+* Functor can be used as sorting criterion.
+* Functor can be used as with internal states.
+
+Function objects are passed by value instead of reference, which has the advantage
+that you can pass constant and temporary objects.
+
+Disadvantage is can't benefit from modifications of state of the function objects.
+Sometimes, access the final state might be necessary.
