@@ -1,5 +1,5 @@
 CFLAG = -Wall -std=c++11
-BIN   = sort1 sequence1 sequence2 foreach3
+BIN   = sort1 sequence1 sequence2 foreach3 removeif1
 
 all: $(BIN)
 
@@ -13,6 +13,9 @@ sequence2 : sequence2.cpp
 	g++ $(CFLAG) $^ -o $@
 
 foreach3 : foreach3.cpp
+	g++ $(CFLAG) $^ -o $@
+
+removeif1 : removeif1.cpp
 	g++ $(CFLAG) $^ -o $@
 
 clean :
