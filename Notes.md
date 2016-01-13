@@ -1,3 +1,9 @@
+<!-- TOC depth:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+
+- [chapter 10 STL Function Objects and Using Lambdas](#chapter-10-stl-function-objects-and-using-lambdas)
+	- [10.2 Predefined Function Objects and Binders](#102-predefined-function-objects-and-binders)
+<!-- /TOC -->
+
 # chapter 10 STL Function Objects and Using Lambdas
 
 A function object or a *functor* is an object that has `operator()` defined.
@@ -28,3 +34,10 @@ There are 3 ways we can achieve this:
 3. You can use the return value of `for_each()` algorithm.  
     * `for_each()` has the unique ability to return its function object. No other
       algorithms can do this.
+
+**_A predicate should always be stateless._** That is, a predicate should not change
+its state due to a call, and a copy of a predicate should have the same state as the original. To ensure
+that you can’t change the state of a predicate due to a function call, you should declare `operator ()`
+as a constant member function.
+
+## 10.2 Predefined Function Objects and Binders
