@@ -16,3 +16,15 @@ that you can pass constant and temporary objects.
 
 Disadvantage is can't benefit from modifications of state of the function objects.
 Sometimes, access the final state might be necessary.
+
+There are 3 ways we can achieve this:
+
+1. Keep the state external and let the function object to refer it.
+2. You can pass the functor by reference:
+
+  ```
+  generate_n<back_insert_iterator<list<int>>, int, IntSequence&> (back_inserter(coll), 4, seq);
+  ```
+3. You can use the return value of `for_each()` algorithm.  
+    * `for_each()` has the unique ability to return its function object. No other
+      algorithms can do this.
