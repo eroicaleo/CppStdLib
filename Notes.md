@@ -2,6 +2,7 @@
 
 - [chapter 10 STL Function Objects and Using Lambdas](#chapter-10-stl-function-objects-and-using-lambdas)
 	- [10.2 Predefined Function Objects and Binders](#102-predefined-function-objects-and-binders)
+		- [10.2.2. Function Adapters and Binders](#1022-function-adapters-and-binders)
 <!-- /TOC -->
 
 # chapter 10 STL Function Objects and Using Lambdas
@@ -41,3 +42,12 @@ that you can’t change the state of a predicate due to a function call, you sho
 as a constant member function.
 
 ## 10.2 Predefined Function Objects and Binders
+
+### 10.2.2. Function Adapters and Binders
+
+The most important adapter is `binder()`, it allows you:
+1. Adapt and compose new function objects out of existing or predefined function
+	objects.
+2. Call global functions.
+3. Call member functions for objects, pointers to objects, and smarter pointer to
+  objects.
