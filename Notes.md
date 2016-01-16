@@ -51,3 +51,25 @@ The most important adapter is `binder()`, it allows you:
 2. Call global functions.
 3. Call member functions for objects, pointers to objects, and smarter pointer to
   objects.
+
+```c++
+std::bind(std::plus<int>(), std::placeholders::_1, 10)
+```
+
+The above code generates a function object, which internally calls `plus<>`, with
+a placeholder `_1` as first parameter and `10` as second parameter. **The placeholder
+`_1` represents the first argument passed to the expression as a whole.**
+
+We can nest binders to compose even more complicated function objects.
+
+```c++
+auto plus10times2 = bind(multiplies<int>(),
+                         bind(plus<int>(), _1, 10
+                         2);
+
+auto pow3 = bind(multiplies<int>(),
+                 bind(multiplies<int>(),
+                      _1,
+                      _1),
+                 _1);
+```
