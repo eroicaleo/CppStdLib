@@ -1,7 +1,11 @@
 CFLAG = -Wall -std=c++11
-BIN   = sort1 sequence1 sequence2 foreach3 removeif1 bind1
+BIN   = sort1 sequence1 sequence2 foreach3 removeif1 bind1 \
+	compose3
 
 all: $(BIN)
+
+compose3 : compose3.cpp
+	g++ $(CFLAG) $^ -o $@
 
 sort1 : sort1.cpp
 	g++ $(CFLAG) $^ -o $@
