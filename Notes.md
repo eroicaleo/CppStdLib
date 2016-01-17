@@ -73,3 +73,16 @@ auto pow3 = bind(multiplies<int>(),
                       _1),
                  _1);
 ```
+
+Note that `bind` make a copy of the passed arguments. To let the function object
+use a reference to pass argument, use `ref()` or `cref()`.
+
+```c++
+void incr(int &i) {
+    ++i;
+}
+
+int i = 0;
+bind(incr, i)(); // output 0
+bind(incr, ref(i))(); // output 1
+```
