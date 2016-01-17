@@ -12,6 +12,10 @@ char myToupper(char c) {
     return use_facet<ctype<char> >(loc).toupper(c);
 }
 
+void incr(int &i) {
+    ++i;
+}
+
 int main() {
     string s("Internationalization");
     string sub("Nation");
@@ -27,4 +31,11 @@ int main() {
         cout << "\"" << sub << "\" is part of \"" << s
             << endl;
     }
+
+    int i = 0;
+    bind(incr, i)();
+    cout << i << endl;
+    bind(incr, ref(i))();
+    cout << i << endl;
+
 }
