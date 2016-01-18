@@ -86,3 +86,12 @@ int i = 0;
 bind(incr, i)(); // output 0
 bind(incr, ref(i))(); // output 1
 ```
+
+**Calling member functions**
+
+Here, `bind(&Person::print, _1)` defines a function object that calls `param1.print()`
+for a passed `Person`. That is, because the first argument is a member function,
+the next argument defines the object for which this member function gets called.
+Any additional argument is passed to the member function, i.e.:
+`bind(&Person::print2, _1, "This is: ")`
+defines a function object that calls `param1.print2("This is: ")` for any passed `Person`.
