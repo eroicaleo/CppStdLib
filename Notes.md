@@ -95,3 +95,21 @@ the next argument defines the object for which this member function gets called.
 Any additional argument is passed to the member function, i.e.:
 `bind(&Person::print2, _1, "This is: ")`
 defines a function object that calls `param1.print2("This is: ")` for any passed `Person`.
+
+We can even also pass pointers to objects and even smart pointers to bind(). Here
+is an example:
+
+```c++
+shared_ptr<Person> p1{new Person{"Yang"}};
+shared_ptr<Person> p2{new Person{"Yukan"}};
+
+vector<shared_ptr<Person>> sp;
+sp.push_back(p1);
+sp.push_back(p2);
+
+for_each(sp.begin(), sp.end(), bind(&Person::print, _ 1));
+```
+
+We can also call the member function which modify the object. Don't get confused
+here,  "`bind` make a copy of the passed arguments", not the object, so the object
+can be modified.
