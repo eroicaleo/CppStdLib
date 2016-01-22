@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <memory>
+#include <map>
 
 using namespace std;
 using namespace std::placeholders;
@@ -54,4 +55,23 @@ int main() {
             bind(&Person::print, _1));
     cout << endl;
 
+    cout << "mem_fn" << endl;
+    for_each(sp.begin(), sp.end(), mem_fn(&Person::print));
+
+    cout << "mem_fn with additional parameter" << endl;
+    for_each(sp.begin(), sp.end(), bind(mem_fn(&Person::print2), _1, "Melon: "));
+
+    map<string, int> mapColl;
+    mapColl.insert(pair<string, int>("Yang", 1));
+    mapColl.insert(pair<string, int>("Yukan", 2));
+    mapColl.insert(pair<string, int>("Melon", 3));
+    int sum = accumulate(mapColl.begin(), mapColl.end(),
+                        0,
+                        bind(plus<int>(),
+                            _1,
+                            bind(&map<string, int>::value_type::second,
+                                _2)
+                            )
+            );
+    cout << "sum is: " << sum << endl;
 }
