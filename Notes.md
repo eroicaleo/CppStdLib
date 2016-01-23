@@ -87,6 +87,29 @@ bind(incr, i)(); // output 0
 bind(incr, ref(i))(); // output 1
 ```
 
+This is particular important when some functions has to take an reference, not a
+copy, because the object cannot be copied, e.g. `cout`. In the following example,
+we have to use `ref(cout)`. Otherwise, won't compile.
+
+```c++
+class Base {
+private:
+    int b;
+
+public:
+    Base(int b) : b {b} {
+    }
+
+    virtual void print(ostream& os) const {
+        os << "This is Base: " << b << endl;
+    }
+
+};
+
+for_each(coll.begin(), coll.end(), bind(&Base::print, placeholders::_ 1, ref(cout)));
+
+```
+
 **Calling member functions**
 
 Here, `bind(&Person::print, _1)` defines a function object that calls `param1.print()`
@@ -113,3 +136,36 @@ for_each(sp.begin(), sp.end(), bind(&Person::print, _ 1));
 We can also call the member function which modify the object. Don't get confused
 here,  "`bind` make a copy of the passed arguments", not the object, so the object
 can be modified.
+
+**`mem_fn` Adapter**
+
+`mem_fn()` simply calls an initialized member function for a passed argument while additional
+arguments are passed as parameters to the member function.
+If a member function takes no argument, it is good to use this adapter. Otherwise
+if we use it with `bind`, doesn't save much typing.
+
+```c++
+for_each(sp.begin(), sp.end(), mem_fn(&Person::print));
+for_each(sp.begin(), sp.end(), bind(mem_fn(&Person::print2), _1, "Melon: "));
+```
+
+**Binding to a data member**
+
+A cool and complex example. Note that the member is `map<string, int>::value_type::second`
+in this case.
+
+```c++
+map<string, int> mapColl;
+mapColl.insert(pair<string, int>("lala", 1));
+mapColl.insert(pair<string, int>("haha", 2));
+mapColl.insert(pair<string, int>("hehe", 3));
+int sum = accumulate(mapColl.begin(), mapColl.end(),
+										0,
+										bind(plus<int>(),
+												_1,
+												bind(&map<string, int>::value_type::second,
+														_ 2)
+												)
+				);
+
+```
