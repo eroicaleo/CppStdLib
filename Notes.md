@@ -45,7 +45,7 @@ as a constant member function.
 
 ### 10.2.2. Function Adapters and Binders
 
-The most important adapter is `binder()`, it allows you:
+The most important adapter is `bind()`, it allows you:
 1. Adapt and compose new function objects out of existing or predefined function
 	objects.
 2. Call global functions.
@@ -169,3 +169,37 @@ int sum = accumulate(mapColl.begin(), mapColl.end(),
 				);
 
 ```
+
+### 10.2.4 deprecated adapters
+
+The difference between `mem_func` and `mem_func_ref` is shown in the following
+example. `mem_func_ref` is the reference version and `mem_func` is the pointer
+version.
+
+```c++
+// mem_fun_ref
+vector<Person> coll1
+		= { Person("Tick"), Person("Trick"), Person("Track") };
+
+for_each(coll1.begin(), coll1.end(), mem_fun_ref(&Person::print));
+
+// mem_fun
+cout << "mem_fun example:" << endl;
+Person* p1 = new Person{"Yang"};
+Person* p2 = new Person{"Yukan"};
+
+vector<Person *> coll2 {p1, p2};
+
+for_each(coll2.begin(), coll2.end(), mem_fun(&Person::print));
+```
+
+The `bind1st` and `bind2nd` doesn't work well for `mem_fun_ref` and `mem_fun`.
+
+```c++
+// doesn't compile
+bind1st(mem_fun_ref(&Person::print2), *coll1.begin())("Person: ");                                                                                                // compile but doesn't work.
+ bind2nd(mem_fun_ref(&Person::print2), "Person: ")(* coll1.begin());
+```
+
+See 2 stackoverflow questions [here](http://stackoverflow.com/questions/7822652/using-bind1st-for-a-method-that-takes-argument-by-reference)
+and [here](http://stackoverflow.com/questions/9180799/an-old-issue-on-bind1st-with-men-fun-in-c-stl).
