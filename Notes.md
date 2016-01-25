@@ -203,3 +203,20 @@ bind1st(mem_fun_ref(&Person::print2), *coll1.begin())("Person: ");              
 
 See 2 stackoverflow questions [here](http://stackoverflow.com/questions/7822652/using-bind1st-for-a-method-that-takes-argument-by-reference)
 and [here](http://stackoverflow.com/questions/9180799/an-old-issue-on-bind1st-with-men-fun-in-c-stl).
+
+## 10.4 Using Lambdas
+
+Here are two examples, one is with state and another without state:
+
+```c++
+auto plus10 = [](int i) {
+										return i+10;
+								};
+
+cout << "+10:    " << plus10(7) << endl;
+
+for_each(coll.begin(), coll.end()                                           
+				 [&sum] (int elem) {
+						 sum += elem;
+				 });
+```
