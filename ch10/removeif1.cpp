@@ -2,6 +2,7 @@
 #include <iterator>
 #include <list>
 #include <algorithm>
+#include <functional>
 
 using namespace std;
 
@@ -33,4 +34,12 @@ int main() {
     PRINT_ELEMENT(coll);
     coll.erase(pos, coll.end());
     PRINT_ELEMENT(coll);
+
+    coll = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    Nth n(3);
+
+    pos = remove_if(coll.begin(), coll.end(), ref(n));
+    coll.erase(pos, coll.end());
+    PRINT_ELEMENT(coll);
+
 }

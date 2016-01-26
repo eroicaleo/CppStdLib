@@ -1,9 +1,12 @@
 CFLAG = -Wall -std=c++11
 BIN   = sort1 sequence1 sequence2 foreach3 removeif1 bind1 \
 	compose3 bind2 test fopow1 deprecated \
-	lambda1 lambda2
+	lambda1 lambda2 lambda3
 
 all: $(BIN)
+
+lambda3 : lambda3.cpp
+	g++ $(CFLAG) $^ -o $@
 
 lambda2 : lambda2.cpp
 	g++ $(CFLAG) $^ -o $@

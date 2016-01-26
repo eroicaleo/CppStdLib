@@ -17,11 +17,21 @@ int main() {
     PRINT_ELEMENT(coll);
 
     list<int>::iterator pos;
+    int count = 0;
     pos = remove_if(coll.begin(), coll.end(),
-                    [count](int){
-                        ++count == 3;
+                    [count] (int) mutable {
+                        return ++count == 3;
                     });
     PRINT_ELEMENT(coll);
+    coll.erase(pos, coll.end());
+    PRINT_ELEMENT(coll);
+
+    coll = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    count = 0;
+    pos = remove_if(coll.begin(), coll.end(),
+                    [&count] (int) {
+                        return ++count == 3;
+                    });
     coll.erase(pos, coll.end());
     PRINT_ELEMENT(coll);
 }
