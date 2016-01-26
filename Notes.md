@@ -220,3 +220,37 @@ for_each(coll.begin(), coll.end()
 						 sum += elem;
 				 });
 ```
+
+When we use stateful lambda object, be careful about the `mutable`. Here are two
+examples, one with `mutable` and one with `reference`. The reason `mutable` will
+give wrong behavior is because again, the `remove_if` internally makes a copy
+of the `lambda` object. So in this case, it's better to use reference. We can do
+the similar thing if we don't use `lambda` object but use normal function object
+with state. See the code at end.
+
+```c++
+coll = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+count = 0;                                                                                                                                                            
+pos = remove_if(coll.begin(), coll.end(),
+								[count] (int) mutable {
+										return ++count == 3;
+								});
+coll.erase(pos, coll.end());
+PRINT_ELEMENT(coll); // wrong behavior: 1 2 4 5 7 8 9 10
+
+coll = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+count = 0;                                                                                                                                                            
+pos = remove_if(coll.begin(), coll.end(),
+								[&count] (int) {
+										return ++count == 3;
+								});
+coll.erase(pos, coll.end());
+PRINT_ELEMENT(coll); // right behavior: 1 2 4 5 6 7 8 9 10
+
+// Normal function object
+#include <functional>
+Nth n(3);
+pos = remove_if(coll.begin(), coll.end(), ref(n));
+coll.erase(pos, coll.end());
+PRINT_ELEMENT(coll); // right behavior: 1 2 4 5 6 7 8 9 10
+```
