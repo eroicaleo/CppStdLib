@@ -10,6 +10,26 @@
 		- [10.4.4 Lambda as Hash Function, Sorting or Equivalence Criterion](#1044-lambda-as-hash-function-sorting-or-equivalence-criterion)
 <!-- /TOC -->
 
+# chapter 06 The Standard Template Library
+
+## 6.1 STL components
+
+The STL consists of containers, iterators and algorithms.
+* **Containers**: manage collections of objects of a certain kind. Different
+ 	container types reflects different requirements for collections in programs.
+* **Iterators**: step through the elements of collections of objects. They offer
+	a small but common interface for any arbitrary container type. For example,
+	one operation lets iterators step to the next element in the collection, regardless
+	what type of the container is. Because the every container class provides its
+	own iterator type which does the right thing.
+* **Algorithms**: use to process the elements of the collection, e.g. search, sort.
+
+The concept of the STL is based on separation of data and operation. The data is managed by
+container classes, and the operations are defined by configurable algorithms. Iterators are the glue
+between these two components. They let any algorithm interact with any container
+
+## 6.2 Containers
+
 # chapter 10 STL Function Objects and Using Lambdas
 
 A function object or a *functor* is an object that has `operator()` defined.
