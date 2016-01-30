@@ -3,7 +3,32 @@
 - [chapter 10 STL Function Objects and Using Lambdas](#chapter-10-stl-function-objects-and-using-lambdas)
 	- [10.2 Predefined Function Objects and Binders](#102-predefined-function-objects-and-binders)
 		- [10.2.2. Function Adapters and Binders](#1022-function-adapters-and-binders)
+		- [10.2.4 deprecated adapters](#1024-deprecated-adapters)
+	- [10.4 Using Lambdas](#104-using-lambdas)
+- [include <functional>](#include-functional)
+		- [10.4.3 Calling member functions and global functions](#1043-calling-member-functions-and-global-functions)
+		- [10.4.4 Lambda as Hash Function, Sorting or Equivalence Criterion](#1044-lambda-as-hash-function-sorting-or-equivalence-criterion)
 <!-- /TOC -->
+
+# chapter 06 The Standard Template Library
+
+## 6.1 STL components
+
+The STL consists of containers, iterators and algorithms.
+* **Containers**: manage collections of objects of a certain kind. Different
+ 	container types reflects different requirements for collections in programs.
+* **Iterators**: step through the elements of collections of objects. They offer
+	a small but common interface for any arbitrary container type. For example,
+	one operation lets iterators step to the next element in the collection, regardless
+	what type of the container is. Because the every container class provides its
+	own iterator type which does the right thing.
+* **Algorithms**: use to process the elements of the collection, e.g. search, sort.
+
+The concept of the STL is based on separation of data and operation. The data is managed by
+container classes, and the operations are defined by configurable algorithms. Iterators are the glue
+between these two components. They let any algorithm interact with any container
+
+## 6.2 Containers
 
 # chapter 10 STL Function Objects and Using Lambdas
 
@@ -253,4 +278,44 @@ Nth n(3);
 pos = remove_if(coll.begin(), coll.end(), ref(n));
 coll.erase(pos, coll.end());
 PRINT_ELEMENT(coll); // right behavior: 1 2 4 5 6 7 8 9 10
+```
+
+### 10.4.3 Calling member functions and global functions
+
+Actually, I personally think using lambda function here is clearer than `bind`
+
+```c++
+// Global function
+pos = search(s.begin(), s.end(),
+						sub.begin(), sub.end(),
+						[] (char c1, char c2) {
+								return myToupper(c1) == myToupper(c2);
+						});
+// Member function
+for_each(coll.begin(), coll.end(),
+				[] (const Person& p) {
+						p.print();
+				});
+for_each(coll.begin(), coll.end(),
+				[] (const Person& p) {
+						p.print2("Person: ");                                            
+				});
+```
+
+### 10.4.4 Lambda as Hash Function, Sorting or Equivalence Criterion
+
+Note here, we have to use `decltype`. The author suggests specifying a class for
+the function objects here would be more readable and convenient.
+
+```c++
+class Person {
+	// code goes here
+};
+auto hash = [] (const Person &p) {
+  // code goes here
+}
+auto eq = [] (const Person& p1, const Person &p2) {
+	// code goes here
+}
+unordered_set<Person, decltype(hash), decltype(eq)> pset(10, hash, eq);
 ```
