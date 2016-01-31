@@ -1,11 +1,14 @@
 <!-- TOC depth:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
+- [chapter 06 The Standard Template Library](#chapter-06-the-standard-template-library)
+	- [6.1 STL components](#61-stl-components)
+	- [6.2 Containers](#62-containers)
+		- [6.2.1 Sequence Containers](#621-sequence-containers)
 - [chapter 10 STL Function Objects and Using Lambdas](#chapter-10-stl-function-objects-and-using-lambdas)
 	- [10.2 Predefined Function Objects and Binders](#102-predefined-function-objects-and-binders)
 		- [10.2.2. Function Adapters and Binders](#1022-function-adapters-and-binders)
 		- [10.2.4 deprecated adapters](#1024-deprecated-adapters)
 	- [10.4 Using Lambdas](#104-using-lambdas)
-- [include <functional>](#include-functional)
 		- [10.4.3 Calling member functions and global functions](#1043-calling-member-functions-and-global-functions)
 		- [10.4.4 Lambda as Hash Function, Sorting or Equivalence Criterion](#1044-lambda-as-hash-function-sorting-or-equivalence-criterion)
 <!-- /TOC -->
@@ -29,6 +32,29 @@ container classes, and the operations are defined by configurable algorithms. It
 between these two components. They let any algorithm interact with any container
 
 ## 6.2 Containers
+
+* **Sequence containers**: ordered collections, meaning every element has a
+	certain position, depends on the time and place of the insertion. There are
+	five of them: `array`, `vector`, `deque`, `list`, and `forward_list`.
+* **Associative containers**: sorted collections, meaning element position depends
+	on its value or its key. The order of insertion doesn't matter. There are 4 of
+	them: `set`, `multiset`, `map`, and `multimap`.
+* **Unordered containers**: Unordered collections, meaning position doesn't matter.
+	Neither the order of insertion of the value of the inserted element has an influence
+	on the position. There are 4 of them: `unordered_set`, `unordered_multiset`,
+	`unordered_map`, and `unordered_multimap`.
+
+* Sequence containers are usually implemented as arrays or linked lists.
+* Associative containers are usually implemented as binary trees.
+* Unordered containers are usually implemented as hash tables.
+
+### 6.2.1 Sequence Containers
+
+**`vector`**
+* Implemented as dynamic array
+* Support random access with index
+* Appending and removing end elements very fast
+* Insert at beginning or middle takes time.
 
 # chapter 10 STL Function Objects and Using Lambdas
 
@@ -273,7 +299,7 @@ coll.erase(pos, coll.end());
 PRINT_ELEMENT(coll); // right behavior: 1 2 4 5 6 7 8 9 10
 
 // Normal function object
-#include <functional>
+// #include <functional>
 Nth n(3);
 pos = remove_if(coll.begin(), coll.end(), ref(n));
 coll.erase(pos, coll.end());
