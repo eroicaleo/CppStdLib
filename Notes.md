@@ -56,6 +56,20 @@ between these two components. They let any algorithm interact with any container
 * Appending and removing end elements very fast
 * Insert at beginning or middle takes time.
 
+**`deque`**
+* Implemented as dynamic array
+* Support random access with index
+* Appending and removing begin and end elements very fast, `push_back` and
+ `push_front`
+* Insert at middle takes time.
+
+**`array`**
+* fixed size, has to decide at creation time, e.g. `array<string, 5>`.
+* Support random access with index.
+* The number of elements is a part of the type of an array. `array<int, 5>` and
+	`array<int, 10>` are two different types, you can't assign or compare them as
+	whole.
+
 # chapter 10 STL Function Objects and Using Lambdas
 
 A function object or a *functor* is an object that has `operator()` defined.
