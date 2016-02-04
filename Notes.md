@@ -70,6 +70,17 @@ between these two components. They let any algorithm interact with any container
 	`array<int, 10>` are two different types, you can't assign or compare them as
 	whole.
 
+**`list`**
+* Implemented as double linked list.
+* Do not provide random access.
+* Removal and insertion is fast at any position.
+* Various ways to iterate over list:
+	```c++
+	for (auto elem: coll) {} // Make a copy of element processed
+	for (auto &elem: coll) {} // If we want to modify the elem
+	for (const auto &elem: coll) {} // avoid a copy operation
+	```
+
 # chapter 10 STL Function Objects and Using Lambdas
 
 A function object or a *functor* is an object that has `operator()` defined.
