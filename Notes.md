@@ -80,6 +80,12 @@ between these two components. They let any algorithm interact with any container
 	for (auto &elem: coll) {} // If we want to modify the elem
 	for (const auto &elem: coll) {} // avoid a copy operation
 	```
+* Common member functions: `empty()`, `push_back()`, `front()` and `pop_front()`.
+
+**`forward_list`**
+* Implemented as single linked list.
+* `push_back()` and `size()` are not implemented.
+* `resize()` is expensive, it has linear complexity.
 
 # chapter 10 STL Function Objects and Using Lambdas
 
