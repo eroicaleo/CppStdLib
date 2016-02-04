@@ -1,7 +1,13 @@
 CFLAG = -Wall -std=c++11
-BIN   = vector1 deque1 array1 list1
+BIN   = vector1 deque1 array1 list1 list2 forward_list1
 
 all: $(BIN)
+
+forward_list1 : forward_list1.cpp
+	g++ $(CFLAG) $^ -o $@
+
+list2 : list2.cpp
+	g++ $(CFLAG) $^ -o $@
 
 list1 : list1.cpp
 	g++ $(CFLAG) $^ -o $@
