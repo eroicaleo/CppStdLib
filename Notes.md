@@ -87,6 +87,30 @@ between these two components. They let any algorithm interact with any container
 * `push_back()` and `size()` are not implemented.
 * `resize()` is expensive, it has linear complexity.
 
+## 6.2.2 Associative Containers
+
+They sort their elements according to certain order. They can be just keys or
+key/value pairs. By default, containers compare the keys with `operator <`. We
+can supply our own comparison functions.
+
+They are implemented as binary tree.
+
+**`set`**
+* Only has key.
+
+**`multiset`**
+* Duplicated keys are allowed.
+
+**`map`**
+* Contains key/value pair.
+
+**`multimap`**
+* Duplicated keys are allowed.
+* We need to insert `pair` to `multimap`. And access element in `multimap`, we
+	need to do `elem.first` and `elem.second`.
+* C++11 guarantees for the element with same key, the one inserted later will be
+	after and remain stable with operation `insert`, `emplace` and `erase`.
+
 # chapter 10 STL Function Objects and Using Lambdas
 
 A function object or a *functor* is an object that has `operator()` defined.
