@@ -87,7 +87,7 @@ between these two components. They let any algorithm interact with any container
 * `push_back()` and `size()` are not implemented.
 * `resize()` is expensive, it has linear complexity.
 
-## 6.2.2 Associative Containers
+### 6.2.2 Associative Containers
 
 They sort their elements according to certain order. They can be just keys or
 key/value pairs. By default, containers compare the keys with `operator <`. We
@@ -110,6 +110,15 @@ They are implemented as binary tree.
 	need to do `elem.first` and `elem.second`.
 * C++11 guarantees for the element with same key, the one inserted later will be
 	after and remain stable with operation `insert`, `emplace` and `erase`.
+
+### 6.2.3 Unordered Containers
+
+The important thing for unordered container is a specific element is somewhere,
+not the order. They are often implemented as hash table, which provides amortized
+constant complexity, if the hash function is good.
+
+The associated containers and unordered containers provide the same interface,
+only declaration is different.
 
 # chapter 10 STL Function Objects and Using Lambdas
 
