@@ -1,8 +1,12 @@
 CFLAG = -Wall -std=c++11
 BIN   = vector1 deque1 array1 list1 list2 forward_list1 \
-	multiset1 multimap1
+	multiset1 multimap1 \
+	assoarray1
 
 all: $(BIN)
+
+assoarray1 : assoarray1.cpp
+	g++ $(CFLAG) $^ -o $@
 
 multimap1 : multimap1.cpp
 	g++ $(CFLAG) $^ -o $@
