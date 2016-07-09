@@ -120,6 +120,16 @@ constant complexity, if the hash function is good.
 The associated containers and unordered containers provide the same interface,
 only declaration is different.
 
+### 6.2.4 Associated Arrays
+
+Both `map` and `ordered_map` can be thought of as associated arrays, whose index
+is not an integer value. As a consequence, both containers provide subscript
+`operator[]`.
+
+Note that the with `[]`, if an key doesn't exist, it will create one for you. So
+it's not an error. But if you use `at()` (C++11) to access an element doesn't
+exist, an `out_of_range` exception will be thrown.
+
 # chapter 10 STL Function Objects and Using Lambdas
 
 A function object or a *functor* is an object that has `operator()` defined.
